@@ -2504,6 +2504,33 @@ window.addEventListener('scroll', () => {
   style="position:fixed;bottom:24px;right:24px;z-index:9999;width:48px;height:48px;border-radius:50%;background:var(--primary);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(62,207,142,0.4);transition:all 0.3s ease;">
   <span id="dm-icon" style="font-size:1.2rem;">🌙</span>
 </button>
+
+<!-- Netlify form detection fallback. Hidden from users; helps Netlify register the form during deploy. -->
+<form name="greenroof-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="greenroof-contact">
+  <input name="bot-field">
+  <input type="text" name="name">
+  <input type="tel" name="phone">
+  <input type="email" name="email">
+  <select name="inquiry_type">
+    <option>Residential Rooftop Project</option>
+    <option>Commercial / Institutional Project</option>
+    <option>Get a Quote</option>
+    <option>Free Site Assessment</option>
+    <option>Pilot Project / First Installation</option>
+    <option>Green Roof Preview / Design Tool</option>
+    <option>Request Full Portfolio</option>
+    <option>Join the Team / Co-founder</option>
+    <option>Partnership / Contractor</option>
+    <option>Construction Firm Partnership</option>
+    <option>Investor Relations</option>
+    <option>Research / NGO Collaboration</option>
+    <option>Media / Press</option>
+    <option>General Question</option>
+  </select>
+  <textarea name="message"></textarea>
+  <input type="hidden" name="cta_source">
+</form>
 <script>
 
 // GreenRoof BD roof design configurator
