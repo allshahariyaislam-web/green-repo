@@ -770,9 +770,24 @@
   }
   .roof-tool-body {
     padding: 0 24px 24px;
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease, padding-bottom 0.45s ease;
   }
-  .roof-tool-disclosure:not([open]) .roof-tool-body {
-    display: none;
+  .roof-tool-body > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .roof-tool-disclosure.is-open .roof-tool-body {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .roof-tool-disclosure:not([open]) .roof-tool-body,
+  .roof-tool-disclosure.is-closing .roof-tool-body {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    padding-bottom: 0;
   }
   .roof-tool-disclosure:not([open]) {
     box-shadow: 0 16px 45px rgba(0,0,0,0.06);
@@ -1127,6 +1142,154 @@
     .preview-toolbar { align-items: flex-start; }
     .roof-svg-wrap { min-height: 300px; }
   }
+
+  /* Compact editorial pass: trims vertical sprawl without flattening the page. */
+  section:not(#home):not(#team):not(#timeline):not(#roof-preview):not(#how-it-works) {
+    padding-top: 4.75rem !important;
+    padding-bottom: 4.75rem !important;
+  }
+  #team { padding-top: 5.5rem !important; padding-bottom: 5.5rem !important; }
+  #timeline { padding-top: 5.75rem !important; padding-bottom: 5.75rem !important; }
+  section .text-center.mb-16 { margin-bottom: 2.5rem !important; }
+  section h2.font-display { margin-top: 0.75rem !important; margin-bottom: 0.75rem !important; }
+  .green-line { margin-top: 0.75rem !important; margin-bottom: 1rem !important; }
+
+  .product-card-clean .relative.p-8 { padding: 1.65rem !important; }
+  .product-card-clean .p-8.pt-6 { padding: 1.6rem !important; padding-top: 1.35rem !important; }
+  .product-card-clean ul { margin-bottom: 1.35rem !important; }
+  .product-card-clean li { font-size: 0.86rem !important; }
+
+  .roof-tool-disclosure > summary { padding: 1rem 1.25rem !important; }
+  .roof-tool-summary .section-tag { margin-bottom: 0.55rem !important; }
+  .roof-tool-summary h2 { font-size: clamp(1.85rem, 3.4vw, 2.45rem) !important; margin: 0.35rem 0 !important; }
+  .roof-tool-summary p { font-size: 0.9rem !important; line-height: 1.45 !important; max-width: 48rem; }
+  .roof-tool-toggle { padding: 0.7rem 1.05rem !important; box-shadow: 0 8px 22px rgba(62,207,142,0.22) !important; }
+  .roof-tool-body { padding: 0 1rem 1rem !important; }
+  .roof-tool-disclosure:not([open]) { max-width: 980px; margin-inline: auto; }
+  .roof-preview-panel { min-height: 540px !important; }
+  .roof-svg-wrap { min-height: 360px !important; }
+  #roof-preview { padding-bottom: 2.25rem !important; }
+  #how-it-works { padding-top: 3.25rem !important; }
+
+  .step-card { padding: 1.65rem 1.4rem 1.35rem !important; border-radius: 16px !important; display: flex; flex-direction: column; min-height: 100%; }
+  .step-card .step-number { position: static !important; width: 38px !important; height: 38px !important; border-radius: 11px !important; margin-bottom: -2.45rem; z-index: 1; }
+  .step-card .text-5xl { font-size: 2.05rem !important; margin-top: 0 !important; margin-bottom: 0.75rem !important; margin-left: 3.25rem !important; line-height: 1; }
+  .step-card h3 { min-height: 3rem; }
+  .step-card p { flex: 1; }
+  .step-card .h-1 { margin-top: 1rem !important; }
+  #how-it-works .grid.sm\:grid-cols-2 { gap: 1.15rem !important; margin-top: 2.25rem !important; }
+  @media (min-width: 900px) {
+    #how-it-works .grid.sm\:grid-cols-2 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  }
+  #how-it-works .mt-16 { margin-top: 2.5rem !important; }
+  .process-banner { padding: 1.6rem 2rem !important; gap: 1.25rem !important; }
+  .process-banner .text-6xl { font-size: 2.5rem !important; }
+
+  .benefit-card { padding: 1.55rem 1.35rem !important; border-radius: 16px !important; }
+  .benefit-icon { width: 58px !important; height: 58px !important; border-radius: 16px !important; font-size: 1.55rem !important; margin-bottom: 1rem !important; }
+  .benefit-card .text-4xl { font-size: 2rem !important; }
+  .smooth-details { color: var(--text-secondary); }
+  .smooth-summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.35rem;
+    margin-inline: auto;
+    border-radius: 999px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--primary-dark);
+    font-size: 0;
+    font-weight: 400;
+    list-style: none;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .smooth-summary::-webkit-details-marker { display: none; }
+  .smooth-summary:hover { transform: translateY(2px); color: var(--primary); }
+  .smooth-summary::after {
+    content: '';
+    width: 0.82rem;
+    height: 0.82rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform 0.28s ease, color 0.2s ease;
+  }
+  .smooth-details.is-open .smooth-summary::after { transform: rotate(225deg) translate(-2px, -2px); }
+  .benefit-card details { margin-top: 0.55rem; font-size: 0.82rem; line-height: 1.45; }
+  .smooth-content { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease, margin-top 0.42s ease; }
+  .smooth-content > * { overflow: hidden; }
+  .smooth-details.is-open .smooth-content { grid-template-rows: 1fr; opacity: 1; margin-top: 0.5rem; }
+  .smooth-details.is-closing .smooth-content { grid-template-rows: 0fr; opacity: 0; margin-top: 0; }
+  .benefit-card .mt-4.p-3 { margin-top: 0.85rem !important; padding: 0.65rem 0.75rem !important; border-radius: 10px !important; line-height: 1.35 !important; }
+  #why-us .grid.md\:grid-cols-3 { margin-top: 1.25rem !important; }
+  #why-us .grid.md\:grid-cols-3 > div { padding: 1rem 1.15rem !important; border-radius: 14px !important; }
+
+  #gallery .gallery-grid { gap: 0.85rem !important; }
+  #about .gap-14 { gap: 2rem !important; }
+  #about .rounded-3xl[style*="min-height"] { min-height: 340px !important; }
+  #team .mt-12 { margin-top: 2rem !important; }
+  .join-cta { padding: 1.35rem 1.75rem !important; }
+  .action-video-card { height: 300px !important; }
+  #demo .mt-16 { margin-top: 2rem !important; }
+  .research-quote { padding: 1.35rem 1.6rem !important; border-radius: 18px !important; }
+  .research-quote .text-4xl { font-size: 1.7rem !important; margin-bottom: 0.75rem !important; }
+  .research-quote p { font-size: clamp(0.98rem, 2vw, 1.2rem) !important; line-height: 1.45 !important; margin-bottom: 1rem !important; }
+  .research-quote .w-12 { width: 2.35rem !important; height: 2.35rem !important; font-size: 1.35rem !important; }
+
+  #our-goal .grid.lg\:grid-cols-3 { gap: 1.35rem !important; }
+  .goal-card-details { margin-bottom: 1.15rem; font-size: 0.88rem; line-height: 1.55; }
+  .goal-card-details .smooth-summary { margin-inline: 0; width: 2rem; height: 1.4rem; }
+  .goal-card-details p { margin: 0; }
+  .founder-tags { flex-wrap: nowrap !important; gap: 0.45rem !important; }
+  .founder-tags span { white-space: nowrap; padding: 0.35rem 0.55rem !important; font-size: 0.68rem !important; }
+  #our-goal [style*="height: 190px"] { height: 145px !important; padding: 1.35rem !important; }
+  #our-goal .p-7.flex { padding: 1.35rem !important; }
+  #our-goal .mt-14 { margin-top: 2rem !important; }
+  #our-goal .rounded-3xl.text-white { padding: 1.6rem 2rem !important; border-radius: 18px !important; }
+  #investors .text-center.mb-16 { margin-bottom: 2.25rem !important; }
+  #investors .investor-stats { gap: 1rem !important; margin-bottom: 2rem !important; }
+  #investors .investor-stats > div { padding: 1.5rem !important; }
+  #investors .investor-stats .text-5xl { font-size: 2.25rem !important; }
+  #contact .grid.lg\:grid-cols-2 { gap: 2rem !important; }
+  .contact-card { padding: 1.55rem !important; }
+
+  @media (max-width: 767px) {
+    section:not(#home):not(#team):not(#timeline):not(#roof-preview):not(#how-it-works) { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    #roof-preview { padding-bottom: 1.5rem !important; }
+    #how-it-works { padding-top: 2.25rem !important; }
+    section .text-center.mb-16 { margin-bottom: 1.75rem !important; }
+    .step-card,
+    .benefit-card {
+      display: grid !important;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 0.3rem 0.85rem;
+      text-align: left !important;
+      align-items: start;
+      padding: 1.05rem !important;
+    }
+    .step-card .step-number { position: static !important; grid-row: 1 / span 3; width: 38px; height: 38px; margin-bottom: 0; }
+    .step-card .text-5xl,
+    .benefit-icon { grid-row: 1 / span 3; grid-column: 1; margin: 0 !important; }
+    .step-card .text-5xl { display: none !important; }
+    .step-card h3,
+    .benefit-card h3,
+    .step-card p,
+    .benefit-card details,
+    .benefit-card .mt-4.p-3,
+    .benefit-card .text-4xl { grid-column: 2; margin-top: 0 !important; }
+    .step-card .h-1 { display: none !important; }
+    .benefit-card summary { margin-inline: 0; }
+    .benefit-card .text-4xl { font-size: 1.55rem !important; }
+    .benefit-card .mt-4.p-3 { font-size: 0.68rem !important; }
+    .process-banner { padding: 1.2rem !important; }
+    .roof-tool-disclosure > summary { padding: 1rem !important; }
+    .roof-tool-summary h2 { font-size: 1.75rem !important; }
+    .action-video-card { height: 220px !important; }
+    #our-goal [style*="height: 190px"] { height: auto !important; min-height: 118px; }
+  }
 </style>
 </head>
 <body>
@@ -1350,7 +1513,7 @@
 <!-- GREEN ROOF PREVIEW CONFIGURATOR -->
 <section id="roof-preview" class="roof-configurator py-24 px-6">
   <div class="max-w-7xl mx-auto">
-    <details class="roof-tool-disclosure reveal">
+    <details class="roof-tool-disclosure smooth-details reveal">
       <summary>
         <div class="roof-tool-summary">
           <span class="section-tag">Preview On My Roof</span>
@@ -1549,15 +1712,21 @@
         <div class="benefit-icon">🌡️</div>
         <div class="text-4xl font-bold text-primary font-display mb-1">~4°C</div>
         <h3 class="font-semibold  mb-2" style="color: var(--text-primary);">Indoor Temperature Drop</h3>
-        <p class="text-soft-gray text-sm leading-relaxed">Your top floor stays noticeably cooler all year — less sweating, less AC, and a home that actually feels comfortable in summer.</p>
-        <div class="mt-4 p-3 bg-red-50 rounded-xl text-xs text-red-600 font-medium">🔴 Bare concrete roof: ~55–60°C surface → 🟢 Green roof: ~30–35°C surface</div>
+        <details class="smooth-details">
+          <summary class="smooth-summary" aria-label="Show indoor temperature details"></summary>
+          <div class="smooth-content benefit-detail"><p>Your top floor stays noticeably cooler all year, with less AC pressure during Dhaka summers.</p></div>
+        </details>
+        <div class="mt-4 p-3 bg-red-50 rounded-xl text-xs text-red-600 font-medium">Bare concrete: ~55–60°C<br>Green roof: ~30–35°C</div>
       </div>
 
       <div class="benefit-card reveal" style="transition-delay: 0.15s;">
         <div class="benefit-icon">💧</div>
         <div class="text-4xl font-bold text-primary font-display mb-1">60%</div>
         <h3 class="font-semibold  mb-2" style="color: var(--text-primary);">Stormwater Retention</h3>
-        <p class="text-soft-gray text-sm leading-relaxed">When the monsoon hits, the green roof soaks up the rain instead of sending it straight to the already-flooded street below.</p>
+        <details class="smooth-details">
+          <summary class="smooth-summary" aria-label="Show stormwater retention details"></summary>
+          <div class="smooth-content benefit-detail"><p>During monsoon bursts, the roof holds water back instead of sending it straight to the street.</p></div>
+        </details>
         <div class="mt-4 p-3 bg-blue-50 rounded-xl text-xs text-blue-600 font-medium">💧 Retains first 25mm of rainfall instantly</div>
       </div>
 
@@ -1565,7 +1734,10 @@
         <div class="benefit-icon">⚡</div>
         <div class="text-4xl font-bold text-primary font-display mb-1">31–35%</div>
         <h3 class="font-semibold  mb-2" style="color: var(--text-primary);">Cooling Energy Savings</h3>
-        <p class="text-soft-gray text-sm leading-relaxed">Your AC doesn't have to fight as hard to keep up — and by the end of the month, your electricity bill makes that very clear.</p>
+        <details class="smooth-details">
+          <summary class="smooth-summary" aria-label="Show cooling energy details"></summary>
+          <div class="smooth-content benefit-detail"><p>Your AC has less heat to fight, especially on the top floor during peak summer.</p></div>
+        </details>
         <div class="mt-4 p-3 bg-yellow-50 rounded-xl text-xs text-yellow-700 font-medium">⚡ Top floor stays 4°C cooler without extra AC</div>
       </div>
 
@@ -1573,7 +1745,10 @@
         <div class="benefit-icon">🏗️</div>
         <div class="text-4xl font-bold text-primary font-display mb-1">5×</div>
         <h3 class="font-semibold  mb-2" style="color: var(--text-primary);">Roof Lifespan</h3>
-        <p class="text-soft-gray text-sm leading-relaxed">The plants act as a natural shield, protecting your roof from the sun and heat that slowly crack bare concrete year after year.</p>
+        <details class="smooth-details">
+          <summary class="smooth-summary" aria-label="Show roof lifespan details"></summary>
+          <div class="smooth-content benefit-detail"><p>Plants shield the roof from heat and UV exposure that slowly wears concrete and membranes down.</p></div>
+        </details>
         <div class="mt-4 p-3 bg-green-50 rounded-xl text-xs text-green-700 font-medium">🏗️ From 10 years → 50+ years membrane life</div>
       </div>
 
@@ -1765,12 +1940,12 @@
           <div class="space-y-4 text-sm leading-relaxed" style="color: var(--text-secondary);">
             <p>Seaum is a final-year engineering student at North South University, Dhaka, and the sole founder of GreenRoof BD. He has spent years asking inconvenient questions about the city he grew up in — why it floods, why it keeps getting hotter, and why the solutions being adopted elsewhere haven't found their way here.</p>
             <p>His work sits at the intersection of environmental engineering and entrepreneurship. He is equally at home reading published hydrology research and building the case for a business around it. He doesn't separate the two.</p>
-            <p>Outside of GreenRoof BD, Seaum runs <em>Unfiltered</em> — an independent editorial publication focused on analytical writing about Bangladeshi and global affairs. He has competed and placed in multiple student competitions centred on engineering and sustainability, including the Hult Prize. He manages paid media campaigns for US-based clients remotely.</p>
+            <p>He has competed and placed in student innovation spaces including the Hult Prize, the Green Campus Initiative by North South University, and Cennovation'26. He has also presented the green roof case in non-competitive academic and professional settings, using those rooms to bring attention to Dhaka's heat, flooding, and rooftop-use problem even when there is no prize at stake.</p>
             <p>He's not waiting to graduate to start building something that matters.</p>
           </div>
 
           <!-- Tags -->
-          <div class="flex flex-wrap gap-2 mt-6">
+          <div class="founder-tags flex flex-wrap gap-2 mt-6">
             <span class="text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(62,207,142,0.08); color: var(--primary); border: 1px solid rgba(62,207,142,0.2);">🌿 Green Infrastructure</span>
             <span class="text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(245,158,11,0.08); color: #D97706; border: 1px solid rgba(245,158,11,0.2);">✍️ Editorial / Writing</span>
             <span class="text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(6,201,184,0.08); color: #0891b2; border: 1px solid rgba(6,201,184,0.2);">📡 Digital Marketing</span>
@@ -1998,7 +2173,10 @@
           </div>
           <!-- Body -->
           <div class="p-7 flex flex-col flex-1">
-            <p class="text-sm leading-relaxed mb-5" style="color: var(--text-secondary);">Embed GreenRoof BD mats into new developments from the architectural design stage. Developers benefit from a marketable sustainability credential; we gain repeatable volume contracts across multiple projects simultaneously.</p>
+            <details class="goal-card-details smooth-details">
+              <summary class="smooth-summary" aria-label="Show construction partnership details"></summary>
+              <div class="smooth-content"><p style="color: var(--text-secondary);">Embed GreenRoof BD mats into new developments from the architectural design stage. Developers benefit from a marketable sustainability credential; we gain repeatable volume contracts across multiple projects simultaneously.</p></div>
+            </details>
             <div class="space-y-2.5 flex-1">
               <div class="flex items-start gap-3 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5" style="background: rgba(62,207,142,0.1); color: var(--primary);">✓</span><span style="color: var(--text-primary);">Pre-specified in architectural drawings</span></div>
               <div class="flex items-start gap-3 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5" style="background: rgba(62,207,142,0.1); color: var(--primary);">✓</span><span style="color: var(--text-primary);">Bulk supply agreements, predictable revenue</span></div>
@@ -2026,7 +2204,10 @@
             </div>
           </div>
           <div class="p-7 flex flex-col flex-1">
-            <p class="text-sm leading-relaxed mb-5" style="color: var(--text-secondary);">Retrofit existing rooftops for owners who want lower energy costs, better comfort, and a building that stands out. The rollable mat format makes this fast and practical — no months of on-site growing required.</p>
+            <details class="goal-card-details smooth-details">
+              <summary class="smooth-summary" aria-label="Show direct sales details"></summary>
+              <div class="smooth-content"><p style="color: var(--text-secondary);">Retrofit existing rooftops for owners who want lower energy costs, better comfort, and a building that stands out. The rollable mat format makes this fast and practical — no months of on-site growing required.</p></div>
+            </details>
             <div class="space-y-2.5 flex-1">
               <div class="flex items-start gap-3 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5" style="background: rgba(6,201,184,0.1); color: var(--teal);">✓</span><span style="color: var(--text-primary);">Free structural site assessment</span></div>
               <div class="flex items-start gap-3 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5" style="background: rgba(6,201,184,0.1); color: var(--teal);">✓</span><span style="color: var(--text-primary);">Transparent per-ft² pricing</span></div>
@@ -2054,7 +2235,10 @@
             </div>
           </div>
           <div class="p-7 flex flex-col flex-1">
-            <p class="text-sm leading-relaxed mb-5" style="color: var(--text-secondary);">Advocate for a mandatory 60% green roof coverage requirement within BNBC — mirroring policies already adopted in Singapore, Toronto, and Hamburg, where green roof mandates transformed entire urban building stocks and created thriving local industries.</p>
+            <details class="goal-card-details smooth-details">
+              <summary class="smooth-summary" aria-label="Show policy pathway details"></summary>
+              <div class="smooth-content"><p style="color: var(--text-secondary);">Advocate for a mandatory 60% green roof coverage requirement within BNBC — mirroring policies already adopted in Singapore, Toronto, and Hamburg, where green roof mandates transformed entire urban building stocks and created thriving local industries.</p></div>
+            </details>
             <div class="space-y-2.5 flex-1">
               <div class="flex items-start gap-3 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5" style="background: rgba(245,158,11,0.1); color: #D97706;">→</span><span style="color: var(--text-primary);">Evidence-backed proposals to RAJUK &amp; Housing Ministry</span></div>
               <div class="flex items-start gap-3 text-sm"><span class="w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0 mt-0.5" style="background: rgba(245,158,11,0.1); color: #D97706;">→</span><span style="color: var(--text-primary);">Partnerships with urban planning researchers &amp; NGOs</span></div>
@@ -2972,6 +3156,40 @@ window.addEventListener('scroll', () => {
     toolDisclosure.addEventListener('toggle', syncTool);
     syncTool();
   }
+  document.querySelectorAll('.smooth-details').forEach(detail => {
+    const summary = detail.querySelector('summary');
+    if (!summary) return;
+    if (detail.open) detail.classList.add('is-open');
+    const updateRoofToggle = () => {
+      if (!detail.classList.contains('roof-tool-disclosure')) return;
+      const toggle = detail.querySelector('.roof-tool-toggle');
+      if (toggle) toggle.textContent = detail.open ? 'Close Preview Tool' : 'Open Preview Tool';
+      setTimeout(() => applyPreviewTransform(), 80);
+    };
+    summary.addEventListener('click', event => {
+      event.preventDefault();
+      if (detail.classList.contains('is-animating')) return;
+      detail.classList.add('is-animating');
+      if (detail.open && detail.classList.contains('is-open')) {
+        detail.classList.remove('is-open');
+        detail.classList.add('is-closing');
+        updateRoofToggle();
+        setTimeout(() => {
+          detail.open = false;
+          detail.classList.remove('is-closing', 'is-animating');
+          updateRoofToggle();
+        }, 560);
+      } else {
+        detail.open = true;
+        detail.classList.remove('is-closing');
+        requestAnimationFrame(() => {
+          detail.classList.add('is-open');
+          detail.classList.remove('is-animating');
+          updateRoofToggle();
+        });
+      }
+    });
+  });
 
   window.setContactIntent = function (inquiry, source) {
     const select = document.getElementById('contactInquiryType');
