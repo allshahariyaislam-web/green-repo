@@ -714,6 +714,419 @@
     h1.font-display { font-size: 2.1rem !important; }
     .trust-badge { font-size: 0.65rem; padding: 5px 10px; }
   }
+
+  /* Roof design configurator */
+  .roof-configurator {
+    background:
+      linear-gradient(135deg, rgba(62,207,142,0.10), transparent 34%),
+      linear-gradient(315deg, rgba(6,201,184,0.08), transparent 38%),
+      var(--card-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .form-status {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(62,207,142,0.10);
+    color: var(--primary-dark);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    display: none;
+  }
+  .form-status.show { display: block; }
+  .roof-tool-disclosure {
+    border: 1px solid rgba(62,207,142,0.18);
+    border-radius: 24px;
+    background: var(--card-bg);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .roof-tool-disclosure > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 28px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: center;
+  }
+  .roof-tool-disclosure > summary::-webkit-details-marker { display: none; }
+  .roof-tool-summary h2 {
+    margin: 12px 0 8px;
+  }
+  .roof-tool-summary p {
+    margin: 0;
+  }
+  .roof-tool-toggle {
+    border: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #3ECF8E, #0FA96A);
+    color: white;
+    padding: 13px 20px;
+    font-weight: 800;
+    box-shadow: 0 14px 34px rgba(62,207,142,0.28);
+    white-space: nowrap;
+  }
+  .roof-tool-body {
+    padding: 0 24px 24px;
+  }
+  .roof-tool-disclosure:not([open]) .roof-tool-body {
+    display: none;
+  }
+  .roof-tool-disclosure:not([open]) {
+    box-shadow: 0 16px 45px rgba(0,0,0,0.06);
+  }
+  .roof-config-shell {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+  .roof-config-panel,
+  .roof-preview-panel {
+    background: var(--card-bg);
+    border: 1px solid rgba(62,207,142,0.16);
+    border-radius: 20px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.08);
+  }
+  .roof-config-panel { padding: 24px; }
+  .roof-preview-panel {
+    padding: 22px;
+    display: grid;
+    grid-template-rows: auto minmax(360px, 1fr) auto;
+    gap: 16px;
+    min-height: 620px;
+  }
+  .config-step {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(74,85,104,0.12);
+  }
+  .config-step:last-child { border-bottom: 0; }
+  .config-step summary {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+  }
+  .config-step summary::-webkit-details-marker { display: none; }
+  .config-step-title strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 1rem;
+  }
+  .config-step-title span {
+    display: block;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+  .config-chevron {
+    min-width: 54px;
+    height: 34px;
+    border-radius: 10px;
+    border: 1px solid rgba(62,207,142,0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: transform 0.2s ease;
+  }
+  .config-step-body { padding-top: 14px; }
+  .config-step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3ECF8E, #0FA96A);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .shape-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .shape-btn {
+    min-height: 84px;
+    border: 1px solid rgba(62,207,142,0.18);
+    border-radius: 14px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.22s ease;
+    padding: 10px;
+    text-align: center;
+  }
+  .shape-btn:hover,
+  .shape-btn.active {
+    border-color: rgba(62,207,142,0.75);
+    box-shadow: 0 12px 30px rgba(62,207,142,0.14);
+    transform: translateY(-2px);
+  }
+  .shape-icon {
+    width: 52px;
+    height: 34px;
+    margin: 0 auto 8px;
+  }
+  .shape-icon polygon {
+    fill: rgba(62,207,142,0.18);
+    stroke: var(--primary-dark);
+    stroke-width: 7;
+    stroke-linejoin: round;
+  }
+  .shape-btn span {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 800;
+  }
+  .roof-field {
+    margin-top: 12px;
+  }
+  .roof-field label {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .roof-field input,
+  .roof-field select {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid rgba(74,85,104,0.18);
+    border-radius: 12px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    padding: 0 14px;
+    outline: none;
+  }
+  .roof-field input[type="range"] {
+    padding: 0;
+    min-height: auto;
+    accent-color: var(--primary-dark);
+  }
+  .design-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .design-btn {
+    display: block;
+    border: 1px solid rgba(74,85,104,0.14);
+    border-radius: 14px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    text-align: left;
+    padding: 13px 14px;
+    transition: all 0.22s ease;
+  }
+  .design-btn:hover,
+  .design-btn.active {
+    border-color: rgba(62,207,142,0.68);
+    background: rgba(62,207,142,0.08);
+  }
+  .design-thumb {
+    width: 100%;
+    height: 66px;
+    border-radius: 10px;
+    background: rgba(8,15,26,0.08);
+    border: 1px solid rgba(74,85,104,0.10);
+  }
+  .design-thumb .thumb-roof {
+    fill: rgba(112,123,125,0.72);
+    stroke: rgba(13,31,22,0.32);
+    stroke-width: 5;
+    stroke-linejoin: round;
+  }
+  .design-thumb .thumb-green {
+    fill: #35C684;
+    stroke: rgba(255,255,255,0.65);
+    stroke-width: 3;
+  }
+  .design-thumb .thumb-open {
+    fill: rgba(244,243,238,0.92);
+    stroke: rgba(13,31,22,0.22);
+    stroke-width: 2;
+  }
+  .design-btn strong {
+    display: none;
+  }
+  .design-btn span {
+    display: none;
+  }
+  .preview-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+  }
+  .preview-title strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 1.15rem;
+  }
+  .preview-title span {
+    color: var(--text-secondary);
+    font-size: 0.86rem;
+  }
+  .coverage-pill {
+    border: 1px solid rgba(62,207,142,0.25);
+    border-radius: 999px;
+    padding: 9px 14px;
+    color: var(--primary-dark);
+    background: rgba(62,207,142,0.10);
+    font-weight: 800;
+    font-size: 0.82rem;
+  }
+  .roof-svg-wrap {
+    background:
+      linear-gradient(140deg, rgba(8,15,26,0.88), rgba(16,28,44,0.72)),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.04), rgba(255,255,255,0.04) 12px, transparent 12px, transparent 28px);
+    border-radius: 18px;
+    overflow: visible;
+    min-height: 430px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    touch-action: none;
+  }
+  .roof-svg-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 30% 18%, rgba(255,255,255,0.16), transparent 32%);
+  }
+  #roofDesignSvg {
+    width: min(92%, 780px);
+    height: auto;
+    display: block;
+    overflow: visible;
+    filter: drop-shadow(0 28px 28px rgba(0,0,0,0.22));
+    position: relative;
+    z-index: 1;
+    cursor: grab;
+    user-select: none;
+    transform: perspective(900px) rotateX(48deg) rotateZ(-2deg);
+    transform-origin: center;
+  }
+  #roofDesignSvg:active { cursor: grabbing; }
+  .preview-controls {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 999px;
+    background: rgba(8,15,26,0.62);
+    border: 1px solid rgba(255,255,255,0.16);
+    backdrop-filter: blur(12px);
+  }
+  .preview-controls button {
+    min-width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(255,255,255,0.92);
+    color: #0D1F12;
+    font-weight: 900;
+    cursor: pointer;
+    padding: 0 10px;
+  }
+  .preview-controls button.wide {
+    border-radius: 999px;
+  }
+  .preview-controls input {
+    width: 96px;
+    accent-color: var(--primary);
+  }
+  .roof-shadow { fill: rgba(0,0,0,0.24); }
+  .roof-side { fill: #384343; }
+  .roof-thickness { fill: #4d3f2a; opacity: 0.86; }
+  .roof-base { fill: #707b7d; stroke: rgba(255,255,255,0.42); stroke-width: 2; stroke-linejoin: round; }
+  .green-lift { filter: drop-shadow(12px 16px 8px rgba(0,0,0,0.26)); }
+  .green-underlay { fill: #6a5231; opacity: 0.92; }
+  .roof-green { fill: url(#grassPattern); stroke: rgba(255,255,255,0.68); stroke-width: 2.4; }
+  .roof-walkway { fill: rgba(244,243,238,0.92); stroke: rgba(13,31,22,0.15); stroke-width: 1; }
+  .roof-edge-line { fill: none; stroke: rgba(255,255,255,0.34); stroke-width: 2; stroke-dasharray: 8 9; }
+  .roof-equipment { fill: rgba(8,15,26,0.44); stroke: rgba(255,255,255,0.28); stroke-width: 1; }
+  .preview-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .preview-metric {
+    border: 1px solid rgba(74,85,104,0.12);
+    border-radius: 14px;
+    padding: 14px;
+    background: var(--card-bg);
+  }
+  .preview-metric span {
+    color: var(--text-secondary);
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+  .preview-metric strong {
+    color: var(--text-primary);
+    display: block;
+    margin-top: 5px;
+    font-size: 1.08rem;
+  }
+  .config-summary {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(62,207,142,0.13), rgba(6,201,184,0.09));
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .config-summary strong { color: var(--text-primary); }
+  @media (max-width: 1024px) {
+    .roof-config-shell { grid-template-columns: 1fr; }
+    .roof-preview-panel { min-height: 0; }
+  }
+  @media (max-width: 640px) {
+    .roof-tool-disclosure > summary {
+      grid-template-columns: 1fr;
+      padding: 22px;
+    }
+    .roof-tool-toggle {
+      width: 100%;
+      text-align: center;
+    }
+    .roof-tool-body {
+      padding: 0 14px 14px;
+    }
+    .shape-grid { grid-template-columns: repeat(2, 1fr); }
+    .design-options { grid-template-columns: repeat(2, 1fr); }
+    .preview-metrics { grid-template-columns: repeat(2, 1fr); }
+    .preview-toolbar { align-items: flex-start; }
+    .roof-svg-wrap { min-height: 300px; }
+  }
 </style>
 </head>
 <body>
@@ -737,6 +1150,7 @@
     <!-- Desktop Links -->
     <div class="hidden lg:flex items-center gap-8" id="nav-links">
       <a href="#products" class="nav-link text-white font-medium text-sm hover:text-primary transition-colors">Products</a>
+      <a href="#roof-preview" class="nav-link text-white font-medium text-sm hover:text-primary transition-colors">Preview</a>
       <a href="#how-it-works" class="nav-link text-white font-medium text-sm hover:text-primary transition-colors">How It Works</a>
       <a href="#why-us" class="nav-link text-white font-medium text-sm hover:text-primary transition-colors">Why Us</a>
       <a href="#team" class="nav-link text-white font-medium text-sm hover:text-primary transition-colors">Team</a>
@@ -760,6 +1174,7 @@
   <div id="mobile-menu" class="lg:hidden backdrop-blur rounded-2xl mt-3 mx-2 shadow-xl border border-black/5" style="background: var(--card-bg);">
     <div class="p-6 flex flex-col gap-4">
       <a href="#products" class="text-soft-gray font-medium hover:text-primary transition-colors" onclick="toggleMenu()">Products</a>
+      <a href="#roof-preview" class="text-soft-gray font-medium hover:text-primary transition-colors" onclick="toggleMenu()">Preview</a>
       <a href="#how-it-works" class="text-soft-gray font-medium hover:text-primary transition-colors" onclick="toggleMenu()">How It Works</a>
       <a href="#why-us" class="text-soft-gray font-medium hover:text-primary transition-colors" onclick="toggleMenu()">Why Us</a>
       <a href="#team" class="text-soft-gray font-medium hover:text-primary transition-colors" onclick="toggleMenu()">Team</a>
@@ -801,7 +1216,7 @@
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style="animation-delay: 0.6s;">
       <a href="#products" class="btn-primary text-base">🌿 Explore Products</a>
-      <a href="#contact" class="btn-outline text-base">📋 Contact Us for Pilot Projects</a>
+      <a href="#contact" class="btn-outline text-base" data-inquiry="Pilot Project / First Installation" data-source="Hero pilot projects">📋 Contact Us for Pilot Projects</a>
     </div>
 
     <!-- Trust badges -->
@@ -887,7 +1302,7 @@
               <span class="text-primary font-bold text-2xl">৳1,500</span>
               <span class="text-soft-gray text-sm ml-1">/ ft²</span>
             </div>
-            <a href="#contact" class="btn-primary py-3 px-7 text-sm">Get Quote →</a>
+            <a href="#contact" class="btn-primary py-3 px-7 text-sm" data-inquiry="Get a Quote" data-source="GreenMat Lite quote">Get Quote →</a>
           </div>
         </div>
       </div>
@@ -920,7 +1335,7 @@
               <span class="text-teal font-bold text-2xl">৳2,200</span>
               <span class="text-soft-gray text-sm ml-1">/ ft²</span>
             </div>
-            <a href="#contact" class="bg-gradient-to-r from-teal to-primary text-white py-3 px-7 rounded-full text-sm font-semibold hover:-translate-y-1 hover:shadow-lg transition-all inline-block">Get Quote →</a>
+            <a href="#contact" class="bg-gradient-to-r from-teal to-primary text-white py-3 px-7 rounded-full text-sm font-semibold hover:-translate-y-1 hover:shadow-lg transition-all inline-block" data-inquiry="Get a Quote" data-source="GreenRoof Pro quote">Get Quote →</a>
           </div>
         </div>
       </div>
@@ -931,6 +1346,132 @@
 <!-- ═══════════════════════════════════════════
      HOW IT WORKS
 ═══════════════════════════════════════════ -->
+
+<!-- GREEN ROOF PREVIEW CONFIGURATOR -->
+<section id="roof-preview" class="roof-configurator py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <details class="roof-tool-disclosure reveal">
+      <summary>
+        <div class="roof-tool-summary">
+          <span class="section-tag">Preview On My Roof</span>
+          <h2 class="font-display text-4xl md:text-5xl" style="color: var(--text-primary);">Design Your <em>Green Roof</em></h2>
+          <p class="text-soft-gray text-lg max-w-3xl">Pick a roof shape, set the area, choose a layout, and preview the green roof only when you want to use the tool.</p>
+        </div>
+        <div class="roof-tool-toggle">Open Preview Tool</div>
+      </summary>
+
+      <div class="roof-tool-body">
+        <div class="roof-config-shell">
+      <div class="roof-config-panel reveal-left">
+        <details class="config-step" open>
+          <summary>
+            <div class="config-step-number">1</div>
+            <div class="config-step-title"><strong>Select roof shape</strong><span>Pick the closest top-view footprint.</span></div>
+            <div class="config-chevron">Open</div>
+          </summary>
+          <div class="config-step-body">
+            <div class="shape-grid" id="roofShapeGrid">
+              <button type="button" class="shape-btn active" data-shape="rectangle">
+                <svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="68,72 352,72 352,248 68,248"></polygon></svg>
+                <span>Rectangle</span>
+              </button>
+              <button type="button" class="shape-btn" data-shape="square">
+                <svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="96,48 324,48 324,272 96,272"></polygon></svg>
+                <span>Square</span>
+              </button>
+              <button type="button" class="shape-btn" data-shape="lshape">
+                <svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="70,58 352,58 352,142 232,142 232,262 70,262"></polygon></svg>
+                <span>L-shape</span>
+              </button>
+              <button type="button" class="shape-btn" data-shape="ushape">
+                <svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="70,58 350,58 350,262 272,262 272,142 148,142 148,262 70,262"></polygon></svg>
+                <span>U-shape</span>
+              </button>
+              <button type="button" class="shape-btn" data-shape="tshape">
+                <svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="160,58 260,58 260,126 350,126 350,204 260,204 260,264 160,264 160,204 70,204 70,126 160,126"></polygon></svg>
+                <span>T-shape</span>
+              </button>
+              <button type="button" class="shape-btn" data-shape="zshape">
+                <svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="106,58 350,58 350,126 224,126 302,262 66,262 66,192 194,192"></polygon></svg>
+                <span>Z-shape</span>
+              </button>
+            </div>
+          </div>
+        </details>
+
+        <details class="config-step">
+          <summary>
+            <div class="config-step-number">2</div>
+            <div class="config-step-title"><strong>Set total roof area</strong><span>Slide or type square footage.</span></div>
+            <div class="config-chevron">Open</div>
+          </summary>
+          <div class="config-step-body">
+            <div class="roof-field">
+              <label for="roofAreaRange"><span>Total area</span><span id="roofAreaLabel">2,000 sq ft</span></label>
+              <input id="roofAreaRange" type="range" min="300" max="12000" step="50" value="2000">
+            </div>
+            <div class="roof-field">
+              <input id="roofAreaInput" type="number" min="300" max="12000" step="50" value="2000" aria-label="Total roof area in square feet">
+            </div>
+            <div class="roof-field">
+              <label for="roofProductSelect"><span>System</span></label>
+              <select id="roofProductSelect">
+                <option value="lite">GreenMat Lite - BDT 1,500 / sq ft</option>
+                <option value="pro">GreenRoof Pro - BDT 2,200 / sq ft</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <details class="config-step" open>
+          <summary>
+            <div class="config-step-number">3</div>
+            <div class="config-step-title"><strong>Choose a design</strong><span>Visual layouts for the selected shape.</span></div>
+            <div class="config-chevron">Open</div>
+          </summary>
+          <div class="config-step-body">
+            <div class="design-options" id="roofDesignOptions"></div>
+            <div class="roof-field">
+              <label for="roofSetbackRange"><span>Setback / open space</span><span id="roofSetbackLabel">18%</span></label>
+              <input id="roofSetbackRange" type="range" min="0" max="40" step="1" value="18">
+            </div>
+          </div>
+        </details>
+
+        <div class="config-summary" id="roofConfigSummary"></div>
+      </div>
+
+      <div class="roof-preview-panel reveal-right">
+        <div class="preview-toolbar">
+          <div class="preview-title">
+            <strong id="roofPreviewTitle">Rectangle roof - Full coverage field</strong>
+            <span id="roofPreviewSubtitle">A polished top-view concept customers can understand in seconds.</span>
+          </div>
+          <div class="coverage-pill" id="roofCoveragePill">Green coverage: 68%</div>
+        </div>
+
+        <div class="roof-svg-wrap" id="roofSvgWrap">
+          <svg id="roofDesignSvg" viewBox="-120 -90 660 500" role="img" aria-label="Top view green roof design preview"></svg>
+          <div class="preview-controls" aria-label="Preview zoom controls">
+            <button type="button" id="roofZoomOut" aria-label="Zoom out">-</button>
+            <input id="roofZoomRange" type="range" min="55" max="260" value="100" aria-label="Preview zoom">
+            <button type="button" id="roofZoomIn" aria-label="Zoom in">+</button>
+            <button type="button" class="wide" id="roofZoomReset" aria-label="Reset preview">Reset</button>
+          </div>
+        </div>
+
+        <div class="preview-metrics">
+          <div class="preview-metric"><span>Total roof</span><strong id="metricTotalArea">2,000 sq ft</strong></div>
+          <div class="preview-metric"><span>Green area</span><strong id="metricGreenArea">1,360 sq ft</strong></div>
+          <div class="preview-metric"><span>Open space</span><strong id="metricOpenArea">640 sq ft</strong></div>
+          <div class="preview-metric"><span>Rough estimate</span><strong id="metricEstimate">BDT 2.04M</strong></div>
+        </div>
+      </div>
+    </div>
+      </div>
+    </details>
+  </div>
+</section>
 <section id="how-it-works" class="py-24 px-6" style="background: var(--card-bg);">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16 reveal">
@@ -984,7 +1525,7 @@
           <h3 class="font-display text-2xl md:text-3xl  mb-3" style="color: var(--text-primary);">Ready to start your rooftop project?</h3>
           <p class="text-soft-gray">Get a free site assessment within 72 hours. We evaluate your roof's structural capacity, drainage, and recommend the right system for your budget.</p>
         </div>
-        <a href="#contact" class="btn-primary whitespace-nowrap">Book Free Assessment</a>
+        <a href="#contact" class="btn-primary whitespace-nowrap" data-inquiry="Free Site Assessment" data-source="Process assessment CTA">Book Free Assessment</a>
       </div>
     </div>
   </div>
@@ -1123,7 +1664,7 @@
     </div>
 
     <div class="text-center mt-10 reveal">
-      <a href="#contact" class="btn-primary">📸 Request Full Portfolio</a>
+      <a href="#contact" class="btn-primary" data-inquiry="Request Full Portfolio" data-source="Gallery portfolio CTA">📸 Request Full Portfolio</a>
     </div>
   </div>
 </section>
@@ -1246,7 +1787,7 @@
         <div class="text-3xl mb-3">🤝</div>
         <h4 class="font-display text-xl  mb-2" style="color: var(--text-primary);">Want to Join the Team?</h4>
         <p class="text-soft-gray text-sm mb-4">We're looking for co-founders, horticulturalists, civil engineers, and business developers who are passionate about sustainable urban infrastructure in Bangladesh.</p>
-        <a href="#contact" class="btn-primary text-sm">Reach Out to Collaborate</a>
+        <a href="#contact" class="btn-primary text-sm" data-inquiry="Join the Team / Co-founder" data-source="Join team CTA">Reach Out to Collaborate</a>
       </div>
     </div>
   </div>
@@ -1538,7 +2079,7 @@
           <p class="text-white/70 text-sm">Whether you are a building owner, construction firm, investor, or policy maker — there is a role for you in Dhaka's green rooftop revolution.</p>
         </div>
         <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-          <a href="#contact" class="btn-primary whitespace-nowrap">Partner With Us</a>
+          <a href="#contact" class="btn-primary whitespace-nowrap" data-inquiry="Partnership / Contractor" data-source="Partner with us CTA">Partner With Us</a>
           <a href="#investors" class="btn-outline whitespace-nowrap">Invest in Us</a>
         </div>
       </div>
@@ -1608,7 +2149,7 @@
           <div class="text-6xl mb-4 animate-float">💼</div>
           <h4 class="font-display text-xl text-white mb-2">Interested in Investing?</h4>
           <p class="text-white/60 text-sm mb-6">GreenRoof BD is at the seed stage and actively looking for its first investors, mentors, and construction firm partners. Let's start a conversation.</p>
-          <a href="mailto:shahriya.islam.seaum@gmail.com?subject=Investor%20Inquiry%20%E2%80%94%20GreenRoof%20BD" class="inline-block text-primary-dark font-bold py-4 px-8 rounded-full hover:-translate-y-2 hover:shadow-2xl transition-all" style="background: var(--card-bg);">Contact Investor Relations →</a>
+          <a href="#contact" class="inline-block text-primary-dark font-bold py-4 px-8 rounded-full hover:-translate-y-2 hover:shadow-2xl transition-all" style="background: var(--card-bg);" data-inquiry="Investor Relations" data-source="Investor relations CTA">Contact Investor Relations →</a>
         </div>
       </div>
     </div>
@@ -1631,43 +2172,57 @@
 
       <!-- Form -->
       <div class="reveal-left">
-        <div class="rounded-3xl p-8 shadow-lg border border-gray-100 contact-card" style="background: var(--card-bg);">
+        <form name="greenroof-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="rounded-3xl p-8 shadow-lg border border-gray-100 contact-card" style="background: var(--card-bg);" onsubmit="return submitContactForm(event)">
+          <input type="hidden" name="form-name" value="greenroof-contact">
+          <p class="hidden" style="display:none;">
+            <label>Do not fill this out: <input name="bot-field"></label>
+          </p>
+          <input type="hidden" name="cta_source" id="contactCtaSource" value="General contact">
           <h3 class="font-display text-2xl  mb-6" style="color: var(--text-primary);">Send Us a Message</h3>
 
           <div class="grid sm:grid-cols-2 gap-4 mb-4">
             <div>
               <label class="block text-sm font-semibold  mb-2" style="color: var(--text-secondary);">Full Name</label>
-              <input type="text" class="form-input" placeholder="Your name">
+              <input type="text" name="name" class="form-input" placeholder="Your name" required>
             </div>
             <div>
               <label class="block text-sm font-semibold  mb-2" style="color: var(--text-secondary);">Phone / WhatsApp</label>
-              <input type="tel" class="form-input" placeholder="+880 1X-XXXX-XXXX">
+              <input type="tel" name="phone" class="form-input" placeholder="+880 1X-XXXX-XXXX">
             </div>
           </div>
           <div class="mb-4">
             <label class="block text-sm font-semibold  mb-2" style="color: var(--text-secondary);">Email Address</label>
-            <input type="email" class="form-input" placeholder="you@example.com">
+            <input type="email" name="email" class="form-input" placeholder="you@example.com" required>
           </div>
           <div class="mb-4">
             <label class="block text-sm font-semibold  mb-2" style="color: var(--text-secondary);">Inquiry Type</label>
-            <select class="form-input">
+            <select class="form-input" name="inquiry_type" id="contactInquiryType">
               <option>Residential Rooftop Project</option>
               <option>Commercial / Institutional Project</option>
-              <option>Pilot Program</option>
-              <option>Investor Relations</option>
+              <option>Get a Quote</option>
+              <option>Free Site Assessment</option>
+              <option>Pilot Project / First Installation</option>
+              <option>Green Roof Preview / Design Tool</option>
+              <option>Request Full Portfolio</option>
+              <option>Join the Team / Co-founder</option>
               <option>Partnership / Contractor</option>
+              <option>Construction Firm Partnership</option>
+              <option>Investor Relations</option>
+              <option>Research / NGO Collaboration</option>
               <option>Media / Press</option>
+              <option>General Question</option>
             </select>
           </div>
           <div class="mb-6">
             <label class="block text-sm font-semibold  mb-2" style="color: var(--text-secondary);">Message</label>
-            <textarea rows="4" class="form-input" placeholder="Tell us about your building, roof size, and what you're hoping to achieve..."></textarea>
+            <textarea rows="4" name="message" class="form-input" placeholder="Tell us about your building, roof size, and what you're hoping to achieve..." required></textarea>
           </div>
-          <button class="btn-primary w-full text-base text-center justify-center flex items-center gap-2" onclick="sendContactEmail()">
+          <button type="submit" class="btn-primary w-full text-base text-center justify-center flex items-center gap-2">
             <span>Send Message</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
           </button>
-        </div>
+          <div id="contactFormStatus" class="form-status" role="status" aria-live="polite"></div>
+        </form>
       </div>
 
       <!-- Info + Map -->
@@ -1949,5 +2504,504 @@ window.addEventListener('scroll', () => {
   style="position:fixed;bottom:24px;right:24px;z-index:9999;width:48px;height:48px;border-radius:50%;background:var(--primary);border:none;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(62,207,142,0.4);transition:all 0.3s ease;">
   <span id="dm-icon" style="font-size:1.2rem;">🌙</span>
 </button>
+<script>
+
+// GreenRoof BD roof design configurator
+(function () {
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const shapes = {
+    rectangle: {
+      label: 'Rectangle',
+      points: [[68,72],[352,72],[352,248],[68,248]],
+      layouts: [
+        ['full', 'Full coverage field', 'Maximum cooling with a clean roll-out mat field.', 0.86],
+        ['walkway', 'Center service walkway', 'Two planted zones split by a maintenance path.', 0.72],
+        ['perimeter', 'Perimeter garden frame', 'Green edge with open center for equipment or seating.', 0.58],
+        ['islands', 'Modular garden islands', 'Separated green modules with walking space between them.', 0.52],
+        ['scurve', 'Soft S-curve path', 'A landscaped curve with planted zones on both sides.', 0.64],
+        ['herringbone', 'Angled mat pattern', 'A premium tile-inspired layout for long rooftops.', 0.70],
+        ['lounge', 'Bench and barbecue terrace', 'Green zones around a social open-air deck.', 0.48],
+        ['ribbon', 'Green ribbon strips', 'Parallel planted strips with slim service aisles.', 0.56]
+      ]
+    },
+    square: {
+      label: 'Square',
+      points: [[96,48],[324,48],[324,272],[96,272]],
+      layouts: [
+        ['full', 'Full square mat', 'Simple high-impact coverage for compact rooftops.', 0.84],
+        ['courtyard', 'Central courtyard', 'A planted frame around an open social area.', 0.62],
+        ['quadrants', 'Four planting quadrants', 'Balanced planted blocks with cross walkways.', 0.60],
+        ['checker', 'Checker garden modules', 'Alternating planted and open-use modules.', 0.50],
+        ['lounge', 'Corner lounge terrace', 'Benches or barbecue space with green edges.', 0.46],
+        ['herringbone', 'Diagonal mat weave', 'A premium patterned green mat field.', 0.66]
+      ]
+    },
+    lshape: {
+      label: 'L-shape',
+      points: [[70,58],[352,58],[352,142],[232,142],[232,262],[70,262]],
+      layouts: [
+        ['full', 'Continuous L field', 'Follows the full roof shape with a single green system.', 0.82],
+        ['walkway', 'L-shaped service path', 'Keeps access open through both wings.', 0.66],
+        ['islands', 'Corner garden zones', 'Creates planted destination zones in the L corner.', 0.54],
+        ['lounge', 'Inside-corner deck', 'Uses the L corner for seating with green around it.', 0.48],
+        ['ribbon', 'Wing ribbon strips', 'Runs planted mat strips down both roof wings.', 0.58],
+        ['scurve', 'Curved garden walk', 'A softer garden route through the L footprint.', 0.56]
+      ]
+    },
+    ushape: {
+      label: 'U-shape',
+      points: [[70,58],[350,58],[350,262],[272,262],[272,142],[148,142],[148,262],[70,262]],
+      layouts: [
+        ['courtyard', 'Courtyard frame', 'Plants the U perimeter while preserving the center.', 0.62],
+        ['walkway', 'Twin wing gardens', 'Green zones in each wing with a clear access route.', 0.58],
+        ['full', 'Maximum U coverage', 'Highest planted area for cooling and stormwater control.', 0.78],
+        ['lounge', 'Central amenity deck', 'Leaves the U center for seating or barbecue use.', 0.50],
+        ['checker', 'Modular wing blocks', 'Alternating green modules through the two wings.', 0.54],
+        ['ribbon', 'U-channel planting', 'Slim planted bands following the U shape.', 0.52]
+      ]
+    },
+    tshape: {
+      label: 'T-shape',
+      points: [[160,58],[260,58],[260,126],[350,126],[350,204],[260,204],[260,264],[160,264],[160,204],[70,204],[70,126],[160,126]],
+      layouts: [
+        ['full', 'Stem and cap coverage', 'Plants both the main roof and the stem.', 0.80],
+        ['quadrants', 'Symmetric garden blocks', 'Organized planted zones around cross access.', 0.58],
+        ['perimeter', 'Equipment bypass', 'Keeps the middle clearer for roof services.', 0.50],
+        ['herringbone', 'Angled cross pattern', 'Tile-inspired green mats across the T head.', 0.62],
+        ['lounge', 'Top-deck seating zone', 'Keeps one end open for people and furniture.', 0.47],
+        ['ribbon', 'Linear mat channels', 'Repeating green strips through the stem and cap.', 0.56]
+      ]
+    },
+    zshape: {
+      label: 'Z-shape',
+      points: [[106,58],[350,58],[350,126],[224,126],[302,262],[66,262],[66,192],[194,192]],
+      layouts: [
+        ['walkway', 'Diagonal service route', 'A planted Z layout with a readable access path.', 0.60],
+        ['islands', 'Split terrace gardens', 'Separated garden zones along the diagonal roof.', 0.52],
+        ['full', 'Full Z coverage', 'A bold planted field following the whole footprint.', 0.78],
+        ['scurve', 'Curved Z garden', 'Softens the angular roof with a green curved route.', 0.56],
+        ['checker', 'Stepped modular blocks', 'Alternating modules that follow the Z geometry.', 0.50],
+        ['lounge', 'Two terrace pockets', 'Open seating pockets at both ends of the roof.', 0.46]
+      ]
+    }
+  };
+
+  const state = {
+    shape: 'rectangle',
+    layout: 'full',
+    area: 2000,
+    setback: 18,
+    product: 'lite',
+    zoom: 1,
+    panX: 0,
+    panY: 0,
+    tiltX: 48,
+    tiltZ: -2
+  };
+
+  const grid = document.getElementById('roofShapeGrid');
+  const options = document.getElementById('roofDesignOptions');
+  const svg = document.getElementById('roofDesignSvg');
+  const areaRange = document.getElementById('roofAreaRange');
+  const areaInput = document.getElementById('roofAreaInput');
+  const productSelect = document.getElementById('roofProductSelect');
+  const setbackRange = document.getElementById('roofSetbackRange');
+  const zoomRange = document.getElementById('roofZoomRange');
+  const svgWrap = document.getElementById('roofSvgWrap');
+
+  if (!grid || !options || !svg) return;
+
+  function polygonString(points) {
+    return points.map(p => p.join(',')).join(' ');
+  }
+
+  function add(tag, attrs, parent) {
+    const el = document.createElementNS(svgNS, tag);
+    Object.keys(attrs || {}).forEach(key => el.setAttribute(key, attrs[key]));
+    parent.appendChild(el);
+    return el;
+  }
+
+  function fmt(n) {
+    return Math.round(n).toLocaleString();
+  }
+
+  function money(n) {
+    if (n >= 1000000) return 'BDT ' + (n / 1000000).toFixed(2) + 'M';
+    return 'BDT ' + fmt(n);
+  }
+
+  function currentLayout() {
+    return shapes[state.shape].layouts.find(l => l[0] === state.layout) || shapes[state.shape].layouts[0];
+  }
+
+  function designMiniSvg(layoutType) {
+    const pts = polygonString(shapes[state.shape].points);
+    let marks = '';
+    if (layoutType === 'full') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.82) translate(-210 -160)"></polygon>';
+    } else if (layoutType === 'walkway') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.82) translate(-210 -160)"></polygon><rect class="thumb-open" x="194" y="46" width="34" height="228" rx="9" transform="rotate(-8 210 160)"></rect>';
+    } else if (layoutType === 'perimeter') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.84) translate(-210 -160)"></polygon><rect class="thumb-open" x="146" y="112" width="128" height="96" rx="16"></rect>';
+    } else if (layoutType === 'courtyard') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.84) translate(-210 -160)"></polygon><rect class="thumb-open" x="154" y="118" width="112" height="84" rx="16"></rect>';
+    } else if (layoutType === 'quadrants') {
+      marks = '<rect class="thumb-green" x="104" y="74" width="86" height="68" rx="12"></rect><rect class="thumb-green" x="230" y="74" width="86" height="68" rx="12"></rect><rect class="thumb-green" x="104" y="180" width="86" height="68" rx="12"></rect><rect class="thumb-green" x="230" y="180" width="86" height="68" rx="12"></rect><rect class="thumb-open" x="198" y="56" width="24" height="220" rx="8"></rect><rect class="thumb-open" x="82" y="148" width="256" height="24" rx="8"></rect>';
+    } else if (layoutType === 'scurve') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.84) translate(-210 -160)"></polygon><path class="thumb-open" d="M112 236 C190 188 104 136 184 90 C232 62 284 74 314 104" fill="none" stroke-width="34" stroke-linecap="round"></path>';
+    } else if (layoutType === 'herringbone') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.84) translate(-210 -160)"></polygon><path class="thumb-open" d="M96 96 L150 150 L96 204 M164 84 L218 138 L164 192 M232 94 L286 148 L232 202" fill="none" stroke-width="14"></path>';
+    } else if (layoutType === 'lounge') {
+      marks = '<polygon class="thumb-green" points="' + pts + '" transform="translate(210 160) scale(0.84) translate(-210 -160)"></polygon><rect class="thumb-open" x="226" y="146" width="92" height="72" rx="15"></rect><circle class="thumb-open" cx="252" cy="110" r="20"></circle>';
+    } else if (layoutType === 'ribbon') {
+      marks = '<rect class="thumb-green" x="94" y="82" width="230" height="28" rx="12"></rect><rect class="thumb-green" x="94" y="142" width="230" height="28" rx="12"></rect><rect class="thumb-green" x="94" y="202" width="230" height="28" rx="12"></rect>';
+    } else if (layoutType === 'checker') {
+      marks = '<rect class="thumb-green" x="98" y="76" width="68" height="56" rx="10"></rect><rect class="thumb-green" x="214" y="76" width="68" height="56" rx="10"></rect><rect class="thumb-green" x="156" y="144" width="68" height="56" rx="10"></rect><rect class="thumb-green" x="272" y="144" width="68" height="56" rx="10"></rect><rect class="thumb-green" x="98" y="212" width="68" height="56" rx="10"></rect><rect class="thumb-green" x="214" y="212" width="68" height="56" rx="10"></rect>';
+    } else {
+      marks = '<rect class="thumb-green" x="92" y="78" width="86" height="64" rx="14"></rect><rect class="thumb-green" x="214" y="74" width="104" height="58" rx="14"></rect><rect class="thumb-green" x="84" y="178" width="96" height="58" rx="14"></rect><rect class="thumb-green" x="224" y="178" width="92" height="68" rx="14"></rect>';
+    }
+    return '<svg class="design-thumb" viewBox="0 0 420 320" aria-hidden="true"><polygon class="thumb-roof" points="' + pts + '"></polygon>' + marks + '</svg>';
+  }
+
+  function coverageRatio() {
+    const base = currentLayout()[3];
+    return Math.max(0.24, Math.min(0.92, base - state.setback * 0.0085));
+  }
+
+  function buildShapeButtons() {
+    const existingButtons = Array.from(grid.querySelectorAll('.shape-btn'));
+    if (!existingButtons.length) {
+      Object.keys(shapes).forEach(key => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'shape-btn';
+        btn.dataset.shape = key;
+        btn.innerHTML = '<svg class="shape-icon" viewBox="0 0 420 320" aria-hidden="true"><polygon points="' + polygonString(shapes[key].points) + '"/></svg><span>' + shapes[key].label + '</span>';
+        grid.appendChild(btn);
+      });
+    }
+    Array.from(grid.querySelectorAll('.shape-btn')).forEach(btn => {
+      const key = btn.dataset.shape;
+      if (!shapes[key]) return;
+      btn.classList.toggle('active', key === state.shape);
+      btn.onclick = () => {
+        state.shape = key;
+        state.layout = shapes[key].layouts[0][0];
+        buildShapeButtons();
+        buildDesignOptions();
+        render();
+      };
+    });
+  }
+
+  function buildDesignOptions() {
+    options.innerHTML = '';
+    shapes[state.shape].layouts.forEach(layout => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'design-btn' + (layout[0] === state.layout ? ' active' : '');
+      btn.title = layout[1] + ' - ' + layout[2];
+      btn.setAttribute('aria-label', layout[1] + ': ' + layout[2]);
+      btn.innerHTML = designMiniSvg(layout[0]) + '<div><strong>' + layout[1] + '</strong><span>' + layout[2] + '</span></div>';
+      btn.addEventListener('click', () => {
+        state.layout = layout[0];
+        buildDesignOptions();
+        render();
+      });
+      options.appendChild(btn);
+    });
+  }
+
+  function addDefs() {
+    const defs = add('defs', {}, svg);
+    const pattern = add('pattern', { id: 'grassPattern', patternUnits: 'userSpaceOnUse', width: 48, height: 48 }, defs);
+    add('rect', { width: 48, height: 48, fill: '#259f64' }, pattern);
+    add('rect', { x: 0, y: 0, width: 48, height: 48, fill: '#46c978', opacity: 0.42 }, pattern);
+    add('path', { d: 'M2 43 C8 22 16 36 22 9 M16 49 C22 26 31 42 38 12 M31 44 C36 24 43 34 50 5', stroke: '#9cf06d', 'stroke-width': 2.2, fill: 'none', opacity: 0.72, 'stroke-linecap': 'round' }, pattern);
+    add('path', { d: 'M-4 28 C8 18 16 30 29 15 M9 8 C20 24 31 0 51 22 M-2 46 L50 8', stroke: '#0f6f45', 'stroke-width': 1.4, fill: 'none', opacity: 0.46, 'stroke-linecap': 'round' }, pattern);
+    add('circle', { cx: 10, cy: 16, r: 1.8, fill: '#d9ff94', opacity: 0.42 }, pattern);
+    add('circle', { cx: 34, cy: 34, r: 1.4, fill: '#eaffaa', opacity: 0.35 }, pattern);
+    const clip = add('clipPath', { id: 'roofClip' }, defs);
+    add('polygon', { points: polygonString(shapes[state.shape].points) }, clip);
+  }
+
+  function drawGreen(shape, layoutType, ratio, scene) {
+    const scale = 0.74 + ratio * 0.26;
+    const insetTransform = 'translate(210 160) scale(' + scale.toFixed(3) + ') translate(-210 -160)';
+    const group = add('g', { 'clip-path': 'url(#roofClip)' }, scene);
+    function raised(tag, attrs) {
+      const underAttrs = Object.assign({}, attrs);
+      underAttrs.class = 'green-underlay';
+      underAttrs.transform = (attrs.transform ? attrs.transform + ' ' : '') + 'translate(12 16)';
+      add(tag, underAttrs, group);
+      const topAttrs = Object.assign({}, attrs);
+      topAttrs.class = 'roof-green';
+      add(tag, topAttrs, group);
+    }
+
+    if (layoutType === 'full') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      return;
+    }
+
+    if (layoutType === 'walkway') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      add('rect', { class: 'roof-walkway', x: 194, y: 34, width: 34 + state.setback * 0.45, height: 252, rx: 10, transform: 'rotate(-8 210 160)' }, group);
+      add('rect', { class: 'roof-equipment', x: 292, y: 82, width: 34, height: 28, rx: 5 }, group);
+      return;
+    }
+
+    if (layoutType === 'perimeter') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      add('rect', { class: 'roof-walkway', x: 145, y: 112, width: 130, height: 96, rx: 16 }, group);
+      add('rect', { class: 'roof-equipment', x: 282, y: 212, width: 38, height: 26, rx: 5 }, group);
+      return;
+    }
+
+    if (layoutType === 'courtyard') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      add('rect', { class: 'roof-walkway', x: 150, y: 116, width: 120, height: 92, rx: 18 }, group);
+      add('circle', { class: 'roof-equipment', cx: 210, cy: 160, r: 20 }, group);
+      return;
+    }
+
+    if (layoutType === 'quadrants') {
+      [[102,72],[228,72],[102,178],[228,178]].forEach(p => {
+        raised('rect', { x: p[0], y: p[1], width: 90, height: 74, rx: 13, transform: insetTransform });
+      });
+      add('rect', { class: 'roof-walkway', x: 198, y: 52, width: 24 + state.setback * 0.3, height: 224, rx: 8 }, group);
+      add('rect', { class: 'roof-walkway', x: 80, y: 148, width: 260, height: 24 + state.setback * 0.3, rx: 8 }, group);
+      return;
+    }
+
+    if (layoutType === 'scurve') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      add('path', { class: 'roof-walkway', d: 'M104 238 C190 188 104 132 184 88 C238 58 288 76 318 108', fill: 'none', 'stroke-width': 36 + state.setback * 0.35, 'stroke-linecap': 'round' }, group);
+      add('circle', { class: 'roof-equipment', cx: 292, cy: 210, r: 18 }, group);
+      return;
+    }
+
+    if (layoutType === 'herringbone') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      for (let x = 72; x < 330; x += 58) {
+        add('path', { class: 'roof-walkway', d: 'M' + x + ' 92 L' + (x + 42) + ' 136 L' + x + ' 180 M' + (x + 42) + ' 136 L' + (x + 86) + ' 92 M' + (x + 42) + ' 136 L' + (x + 86) + ' 180', fill: 'none', 'stroke-width': 10, 'stroke-linecap': 'round', opacity: 0.55 }, group);
+      }
+      return;
+    }
+
+    if (layoutType === 'lounge') {
+      raised('polygon', { points: polygonString(shape.points), transform: insetTransform });
+      add('rect', { class: 'roof-walkway', x: 224, y: 138, width: 96 + state.setback * 0.8, height: 82, rx: 18 }, group);
+      add('circle', { class: 'roof-equipment', cx: 264, cy: 178, r: 18 }, group);
+      add('rect', { class: 'roof-equipment', x: 236, y: 106, width: 66, height: 18, rx: 8 }, group);
+      return;
+    }
+
+    if (layoutType === 'ribbon') {
+      [[94,82,232,30],[94,140,232,30],[94,198,232,30]].forEach(r => {
+        raised('rect', { x: r[0], y: r[1], width: r[2], height: r[3], rx: 14, transform: insetTransform });
+      });
+      return;
+    }
+
+    if (layoutType === 'checker') {
+      [[98,76],[214,76],[156,144],[272,144],[98,212],[214,212]].forEach(p => {
+        raised('rect', { x: p[0], y: p[1], width: 70, height: 58, rx: 12, transform: insetTransform });
+      });
+      return;
+    }
+
+    [[92,78,86,64],[214,74,104,58],[84,178,96,58],[224,178,92,68],[168,124,86,58]].forEach(r => {
+      raised('rect', { x: r[0], y: r[1], width: r[2], height: r[3], rx: 14, transform: insetTransform });
+    });
+  }
+
+  function renderSvg() {
+    const shape = shapes[state.shape];
+    const layoutType = state.layout;
+    const ratio = coverageRatio();
+    svg.innerHTML = '';
+    addDefs();
+    const scene = add('g', { id: 'roofScene' }, svg);
+    add('polygon', { class: 'roof-shadow', points: polygonString(shape.points), transform: 'translate(30 34)' }, scene);
+    add('polygon', { class: 'roof-thickness', points: polygonString(shape.points), transform: 'translate(16 20)' }, scene);
+    add('polygon', { class: 'roof-side', points: polygonString(shape.points), transform: 'translate(9 11)' }, scene);
+    add('polygon', { class: 'roof-base', points: polygonString(shape.points) }, scene);
+    drawGreen(shape, layoutType, ratio, scene);
+    add('polygon', { class: 'roof-edge-line', points: polygonString(shape.points) }, scene);
+    applyPreviewTransform();
+  }
+
+  function applyPreviewTransform() {
+    const scene = document.getElementById('roofScene');
+    if (!scene) return;
+    scene.setAttribute('transform', 'translate(210 160) scale(' + state.zoom.toFixed(2) + ') translate(-210 -160)');
+    svg.style.transform = 'perspective(900px) rotateX(' + state.tiltX.toFixed(1) + 'deg) rotateZ(' + state.tiltZ.toFixed(1) + 'deg)';
+    if (zoomRange) zoomRange.value = Math.round(state.zoom * 100);
+  }
+
+  function setZoom(value) {
+    state.zoom = Math.max(0.55, Math.min(2.6, value));
+    applyPreviewTransform();
+  }
+
+  function render() {
+    state.area = Math.max(300, Math.min(12000, Number(state.area) || 2000));
+    state.setback = Number(state.setback) || 0;
+    const ratio = coverageRatio();
+    const greenArea = state.area * ratio;
+    const openArea = state.area - greenArea;
+    const price = greenArea * (state.product === 'lite' ? 1500 : 2200);
+    const layout = currentLayout();
+
+    areaRange.value = state.area;
+    areaInput.value = state.area;
+    productSelect.value = state.product;
+    setbackRange.value = state.setback;
+
+    document.getElementById('roofAreaLabel').textContent = fmt(state.area) + ' sq ft';
+    document.getElementById('roofSetbackLabel').textContent = state.setback + '%';
+    document.getElementById('roofPreviewTitle').textContent = shapes[state.shape].label + ' roof - ' + layout[1];
+    document.getElementById('roofPreviewSubtitle').textContent = layout[2];
+    document.getElementById('roofCoveragePill').textContent = 'Green coverage: ' + Math.round(ratio * 100) + '%';
+    document.getElementById('metricTotalArea').textContent = fmt(state.area) + ' sq ft';
+    document.getElementById('metricGreenArea').textContent = fmt(greenArea) + ' sq ft';
+    document.getElementById('metricOpenArea').textContent = fmt(openArea) + ' sq ft';
+    document.getElementById('metricEstimate').textContent = money(price);
+    document.getElementById('roofConfigSummary').innerHTML = '<strong>' + shapes[state.shape].label + ' roof:</strong> ' + fmt(greenArea) + ' sq ft of green roof, about ' + fmt(openArea) + ' sq ft reserved for walkways, equipment clearance, edges, and open-use space.';
+    renderSvg();
+  }
+
+  areaRange.addEventListener('input', e => { state.area = e.target.value; render(); });
+  areaInput.addEventListener('input', e => { state.area = e.target.value; render(); });
+  productSelect.addEventListener('change', e => { state.product = e.target.value; render(); });
+  setbackRange.addEventListener('input', e => { state.setback = e.target.value; render(); });
+  if (zoomRange) zoomRange.addEventListener('input', e => setZoom(Number(e.target.value) / 100));
+  const zoomIn = document.getElementById('roofZoomIn');
+  const zoomOut = document.getElementById('roofZoomOut');
+  const zoomReset = document.getElementById('roofZoomReset');
+  if (zoomIn) zoomIn.addEventListener('click', () => setZoom(state.zoom + 0.18));
+  if (zoomOut) zoomOut.addEventListener('click', () => setZoom(state.zoom - 0.18));
+  if (zoomReset) zoomReset.addEventListener('click', () => {
+    state.zoom = 1;
+    state.panX = 0;
+    state.panY = 0;
+    state.tiltX = 48;
+    state.tiltZ = -2;
+    applyPreviewTransform();
+  });
+
+  let dragStart = null;
+  let lastPinchDistance = null;
+  function touchDistance(touches) {
+    const a = touches[0];
+    const b = touches[1];
+    return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+  }
+  svg.addEventListener('wheel', e => {
+    e.preventDefault();
+    setZoom(state.zoom + (e.deltaY < 0 ? 0.12 : -0.12));
+  }, { passive: false });
+  svg.addEventListener('pointerdown', e => {
+    svg.setPointerCapture(e.pointerId);
+    dragStart = { x: e.clientX, y: e.clientY, tiltX: state.tiltX, tiltZ: state.tiltZ };
+  });
+  svg.addEventListener('pointermove', e => {
+    if (!dragStart) return;
+    state.tiltZ = Math.max(-24, Math.min(24, dragStart.tiltZ - (e.clientX - dragStart.x) / 9));
+    state.tiltX = Math.max(28, Math.min(68, dragStart.tiltX - (e.clientY - dragStart.y) / 7));
+    applyPreviewTransform();
+  });
+  svg.addEventListener('pointerup', () => { dragStart = null; });
+  svg.addEventListener('pointercancel', () => { dragStart = null; });
+  if (svgWrap) {
+    svgWrap.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) lastPinchDistance = touchDistance(e.touches);
+    }, { passive: true });
+    svgWrap.addEventListener('touchmove', e => {
+      if (e.touches.length !== 2 || !lastPinchDistance) return;
+      e.preventDefault();
+      const nextDistance = touchDistance(e.touches);
+      setZoom(state.zoom + (nextDistance - lastPinchDistance) / 210);
+      lastPinchDistance = nextDistance;
+    }, { passive: false });
+    svgWrap.addEventListener('touchend', () => { lastPinchDistance = null; });
+  }
+
+  document.querySelectorAll('.config-step').forEach(step => {
+    const label = step.querySelector('.config-chevron');
+    const sync = () => { if (label) label.textContent = step.open ? 'Close' : 'Open'; };
+    step.addEventListener('toggle', sync);
+    sync();
+  });
+  const toolDisclosure = document.querySelector('.roof-tool-disclosure');
+  if (toolDisclosure) {
+    const toggle = toolDisclosure.querySelector('.roof-tool-toggle');
+    const syncTool = () => {
+      if (toggle) toggle.textContent = toolDisclosure.open ? 'Close Preview Tool' : 'Open Preview Tool';
+      setTimeout(() => applyPreviewTransform(), 60);
+    };
+    toolDisclosure.addEventListener('toggle', syncTool);
+    syncTool();
+  }
+
+  window.setContactIntent = function (inquiry, source) {
+    const select = document.getElementById('contactInquiryType');
+    const sourceInput = document.getElementById('contactCtaSource');
+    if (select && inquiry) {
+      const match = Array.from(select.options).find(option => option.value === inquiry || option.textContent === inquiry);
+      if (match) select.value = match.value;
+    }
+    if (sourceInput && source) sourceInput.value = source;
+    const contact = document.getElementById('contact');
+    if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  document.querySelectorAll('a[data-inquiry]').forEach(link => {
+    link.addEventListener('click', () => {
+      window.setContactIntent(link.dataset.inquiry, link.dataset.source || link.textContent.trim());
+    });
+  });
+
+  window.submitContactForm = function (event) {
+    event.preventDefault();
+    const form = event.target;
+    const status = document.getElementById('contactFormStatus');
+    const button = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+    const body = new URLSearchParams(formData).toString();
+    if (status) {
+      status.textContent = 'Sending your message...';
+      status.classList.add('show');
+    }
+    if (button) button.disabled = true;
+
+    if (location.protocol === 'file:') {
+      if (status) status.textContent = 'Preview mode: this form is ready for Netlify submission after deployment. The recipient email is configured in Netlify, not shown in the page.';
+      if (button) button.disabled = false;
+      return false;
+    }
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
+    }).then(() => {
+      form.reset();
+      if (status) status.textContent = 'Thanks. Your message has been sent.';
+    }).catch(() => {
+      if (status) status.textContent = 'Something went wrong. Please try again or use the contact details below.';
+    }).finally(() => {
+      if (button) button.disabled = false;
+    });
+    return false;
+  };
+
+  buildShapeButtons();
+  buildDesignOptions();
+  render();
+})();
+</script>
 </body>
 </html>
